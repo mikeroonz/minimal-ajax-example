@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>AJAX Test</title>
+</head>
+<body>
+<script type="text/Javascript">
+function xml_http_post(url, data, callback) {
+	var req = false;
+	try {
+		req = new XMLHttpRequest();
+	}
+	catch (e) {
+		alert("could not create XMLHttpRequest");
+		return false;
+	}
+	req.open("POST", url, true);
+	req.onreadystatechange = function() {
+		if (req.readyState == 4) {
+			callback(req);
+		}
+	}
+	req.send(data);
+}
+
+function xml_http_callback(req) {
+	alert("callback");
+	console.log("responseText = " + req.responseText);
+	console.log("readyState = " + req.readyState);
+	console.log("status = " + req.status);
+}
+</script>
+<div align=center>
+<h3>Test</h3>
+<a onclick=xml_http_post("/ajax-get","",xml_http_callback)>Click here</a>
+</div>
+</body>
+</html>
