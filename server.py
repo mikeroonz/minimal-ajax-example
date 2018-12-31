@@ -3,7 +3,7 @@ import socketserver
 
 PORT = 8000
 
-jclass myHTTPServer(http.server.SimpleHTTPRequestHandler):
+class myHTTPServer(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         print("command is ",self.command)
         print("path is ",self.path)
@@ -25,7 +25,15 @@ jclass myHTTPServer(http.server.SimpleHTTPRequestHandler):
             
 Handler = myHTTPServer
 
-with socketserver.TCPServer(("", PORT), Handler) as httpd:
-    print("serving at port", PORT)
+#with socketserver.TCPServer(("", PORT), Handler) as httpd:
+#    print("serving at port", PORT)
+#    httpd.serve_forever()
+httpd = socketserver.TCPServer(("", PORT), Handler)
+try:
     httpd.serve_forever()
+except:
+    httpd.server_close()
+    raise
+
+
     
