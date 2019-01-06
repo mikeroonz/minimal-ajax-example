@@ -21,7 +21,10 @@ class myHTTPServer(http.server.SimpleHTTPRequestHandler):
             self.end_headers()
             #string literals are prefixed with 'b' to indicate utf-8 encoding
             self.wfile.write(b"<?xml version='1.0'?>")
+            self.wfile.write(b"<datablock>")
             self.wfile.write(b"<name>value</name>")
+            self.wfile.write(b"<name2>value2</name2>")
+            self.wfile.write(b"</datablock>")
             
 Handler = myHTTPServer
 

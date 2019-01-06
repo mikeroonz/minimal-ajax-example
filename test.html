@@ -6,6 +6,7 @@
 </head>
 <body>
 <script type="text/Javascript">
+RESPONSE_READY = 4;
 function xml_http_post(url, data, callback) {
 	var req = false;
 	try {
@@ -17,7 +18,7 @@ function xml_http_post(url, data, callback) {
 	}
 	req.open("POST", url, true);
 	req.onreadystatechange = function() {
-		if (req.readyState == 4) {
+		if (req.readyState == RESPONSE_READY) {
 			callback(req);
 		}
 	}
